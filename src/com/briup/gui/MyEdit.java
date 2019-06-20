@@ -3,7 +3,7 @@ package com.briup.gui;
 /* *
  * @author: xuchunlin
  * @createTime: 2019/6/20/11:43
- * @description: TODO
+ * @description: 编辑器
  */
 
 import com.sun.corba.se.impl.interceptors.PICurrent;
@@ -49,7 +49,8 @@ public class MyEdit extends JFrame implements ActionListener {
         setIconImage(icon.getImage());
         setTitle("编辑器");
         setSize(600,600);
-        setLocation(200,200);
+        setLocation(700,260);
+        //(int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()-getWidth()*2)/2,(int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()-getHeight()*2)/2
         //设置界面大小不可改变
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -105,12 +106,16 @@ public class MyEdit extends JFrame implements ActionListener {
         //多行文本域
         area = new JTextArea();
         area.setFont(font);
+        //自动换行
+        area.setLineWrap(true);
+        area.setWrapStyleWord(true);
         //添加滚动条
         /*JScrollPane sPanel = new JScrollPane(area);*/
         JViewport port=new JViewport();
         port.add(area);
         JScrollPane sPanel = new JScrollPane(port);
         contentPane.add(sPanel);
+
         //上下文菜单
         popupMenu = new JPopupMenu();
         pCopy = new JMenuItem("复制");
@@ -123,6 +128,10 @@ public class MyEdit extends JFrame implements ActionListener {
         popupMenu.add(pPaste);
         popupMenu.add(pCut);
 
+        //按钮，菜单项添加事件
+        addBtnListener(copyTool,pasteTool,cutTool);
+        addItemListener(copyItem,pasteItem,cutItem,pCopy,
+                pPaste,pCut,openItem,saveItem,exitItem,aboutItem);
 
         //文本域添加鼠标事件
         area.addMouseListener(new MouseListener() {
@@ -156,10 +165,21 @@ public class MyEdit extends JFrame implements ActionListener {
 
             }
         });
-
         //把菜单栏加入到容器
         setJMenuBar(bar);
     }
+
+    public void addBtnListener(JButton... btn){
+        for (JButton b:btn){
+            b.addActionListener(this);
+        }
+    }
+    public void addItemListener(JMenuItem... item){
+        for (JMenuItem i:item){
+            i.addActionListener(this);
+        }
+    }
+
 
     public void go(){
         setVisible(true);
@@ -174,6 +194,12 @@ public class MyEdit extends JFrame implements ActionListener {
             time++;
             System.out.println("时间为："+time);
         }*/
+        if (source==exitItem){
+            System.exit(0);
+        }
+        if (source==aboutItem){
+            JOptionPane.showMessageDialog(null,"这是一个编辑器");
+        }
 
         if (source==pCopy||source==copyItem||source==copyTool){
             area.copy();

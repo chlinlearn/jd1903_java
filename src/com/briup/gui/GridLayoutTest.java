@@ -16,9 +16,14 @@ public class GridLayoutTest extends JFrame implements ActionListener {
     private JTextField resultText;
     private JButton[] btns = new JButton[10];
     private JButton clearBtn,addBtn,minusBtn,divBtn,mulBtn,equalsBtn;
+    private int str = 0;
+    private int num1 = 0;
+    private int num2 = 0;
+    private char op = ' ';
 
     public GridLayoutTest(){
-        ImageIcon icon = new ImageIcon("src/com/briup/gui/icons/manager.png");
+        ImageIcon icon = new ImageIcon("src/com/briup/gui/" +
+                "icons/计算器.png");
         setIconImage(icon.getImage());
         setTitle("计算器");
         setSize(500,500);
@@ -37,7 +42,7 @@ public class GridLayoutTest extends JFrame implements ActionListener {
         resultText.setText("0");
         //设置不可编辑
         resultText.setEditable(false);
-        resultText.setBackground(Color.pink);
+        resultText.setBackground(Color.LIGHT_GRAY);
         //设置字体
         Font font = new Font("楷体",Font.BOLD,42);
         resultText.setFont(font);
@@ -75,13 +80,6 @@ public class GridLayoutTest extends JFrame implements ActionListener {
 
         //为按钮添加监听事件
         addListener(clearBtn,addBtn,minusBtn,mulBtn,divBtn,equalsBtn);
-        /*clearBtn.addActionListener(this);
-        addBtn.addActionListener(this);
-        minusBtn.addActionListener(this);
-        mulBtn.addActionListener(this);
-        divBtn.addActionListener(this);
-        equalsBtn.addActionListener(this);*/
-
     }
 
     public void addListener(JButton... btn){
@@ -97,20 +95,55 @@ public class GridLayoutTest extends JFrame implements ActionListener {
     //事件集中处理
     @Override
     public void actionPerformed(ActionEvent e) {
+        str = Integer.parseInt(resultText.getText());
         //获取事件源
         Object source = e.getSource();
         if (source == clearBtn){
             resultText.setText("0");
         }else if (source == minusBtn){
-
+            //减法
+            num1 = str;
+            op = '-';
+            resultText.setText("0");
         }else if (source == addBtn){
-
+            //加法
+            num1 = str;
+            op = '+';
+            resultText.setText("0");
+            //System.out.println(num1);
         }else if (source == mulBtn){
+            //乘法
+            num1 = str;
+            op = '*';
+            resultText.setText("0");
 
         }else if (source == divBtn){
+            //除法
+            num1 = str;
+            op = '/';
+            resultText.setText("0");
 
         }else if (source == equalsBtn){
-
+            int result = 0;
+            num2 = str;
+            switch (op){
+                case '+':
+                    result = num1+num2;
+                    break;
+                case '-':
+                    result = num1-num2;
+                    break;
+                case '*':
+                    result = num1*num2;
+                    break;
+                case '/':
+                    if (num2==0){
+                        JOptionPane.showMessageDialog(null,"除数不能为0");
+                    }
+                    result = num1/num2;
+                    break;
+            }
+            resultText.setText(result+"");
         }else {
             //数字按钮
             String s = resultText.getText();
