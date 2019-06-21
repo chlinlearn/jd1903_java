@@ -3,7 +3,7 @@ package com.briup.gui;
 /* *
  * @author: xuchunlin
  * @createTime: 2019/6/20/10:20
- * @description: ç½‘æ ¼å¸ƒå±€æµ‹è¯•,è®¡ç®—å™¨
+ * @description: Íø¸ñ²¼¾Ö²âÊÔ,¼ÆËãÆ÷
  */
 
 import javax.swing.*;
@@ -16,19 +16,19 @@ public class GridLayoutTest extends JFrame implements ActionListener {
     private JTextField resultText;
     private JButton[] btns = new JButton[10];
     private JButton clearBtn,addBtn,minusBtn,divBtn,mulBtn,equalsBtn;
-    private int str = 0;
-    private int num1 = 0;
-    private int num2 = 0;
-    private char op = ' ';
+    private int str = 0;//ÁÙÊ±±äÁ¿£¬»ñÈ¡µ±Ç°ÊäÈë
+    private int num1 = 0;//µÚÒ»¸ö²Ù×÷Êı
+    private int num2 = 0;//µÚ¶ş¸ö²Ù×÷Êı
+    private char op = ' ';//²Ù×÷·û
 
     public GridLayoutTest(){
         ImageIcon icon = new ImageIcon("src/com/briup/gui/" +
-                "icons/è®¡ç®—å™¨.png");
+                "icons/¼ÆËãÆ÷.png");
         setIconImage(icon.getImage());
-        setTitle("è®¡ç®—å™¨");
+        setTitle("¼ÆËãÆ÷");
         setSize(500,500);
         setLocation(200,200);
-        //è®¾ç½®ç•Œé¢å¤§å°ä¸å¯æ”¹å˜
+        //ÉèÖÃ½çÃæ´óĞ¡²»¿É¸Ä±ä
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         contentPane = getContentPane();
@@ -37,24 +37,24 @@ public class GridLayoutTest extends JFrame implements ActionListener {
     }
     public void initGui(){
         resultText = new JTextField();
-        //è®¾ç½®å…‰æ ‡æ–‡æœ¬å³å¯¹é½
+        //ÉèÖÃ¹â±êÎÄ±¾ÓÒ¶ÔÆë
         resultText.setHorizontalAlignment(JTextField.RIGHT);
         resultText.setText("0");
-        //è®¾ç½®ä¸å¯ç¼–è¾‘
+        //ÉèÖÃ²»¿É±à¼­
         resultText.setEditable(false);
         resultText.setBackground(Color.LIGHT_GRAY);
-        //è®¾ç½®å­—ä½“
-        Font font = new Font("æ¥·ä½“",Font.BOLD,42);
+        //ÉèÖÃ×ÖÌå
+        Font font = new Font("¿¬Ìå",Font.BOLD,42);
         resultText.setFont(font);
         contentPane.add(resultText,BorderLayout.NORTH);
 
-        //ä¸­é—´æŒ‰é’®éƒ¨åˆ†
+        //ÖĞ¼ä°´Å¥²¿·Ö
         JPanel cPanel = new JPanel();
         cPanel.setLayout(new GridLayout(4,4));
         for (int i=0;i<btns.length;i++){
             btns[i] = new JButton(i+"");
             btns[i].setFont(font);
-            //ä¸ºæŒ‰é’®æ·»åŠ ç›‘å¬äº‹ä»¶
+            //Îª°´Å¥Ìí¼Ó¼àÌıÊÂ¼ş
             btns[i].addActionListener(this);
             cPanel.add(btns[i]);
         }
@@ -78,7 +78,7 @@ public class GridLayoutTest extends JFrame implements ActionListener {
         cPanel.add(divBtn);
         cPanel.add(equalsBtn);
 
-        //ä¸ºæŒ‰é’®æ·»åŠ ç›‘å¬äº‹ä»¶
+        //Îª°´Å¥Ìí¼Ó¼àÌıÊÂ¼ş
         addListener(clearBtn,addBtn,minusBtn,mulBtn,divBtn,equalsBtn);
     }
 
@@ -92,40 +92,39 @@ public class GridLayoutTest extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    //äº‹ä»¶é›†ä¸­å¤„ç†
+    //ÊÂ¼ş¼¯ÖĞ´¦Àí
     @Override
     public void actionPerformed(ActionEvent e) {
-        str = Integer.parseInt(resultText.getText());
-        //è·å–äº‹ä»¶æº
+        //»ñÈ¡ÊÂ¼şÔ´
         Object source = e.getSource();
         if (source == clearBtn){
             resultText.setText("0");
         }else if (source == minusBtn){
-            //å‡æ³•
-            num1 = str;
+            //¼õ·¨
+            num1 = Integer.parseInt(resultText.getText());
             op = '-';
-            resultText.setText("0");
+            resultText.setText("-");
         }else if (source == addBtn){
-            //åŠ æ³•
-            num1 = str;
+            //¼Ó·¨
+            num1 = Integer.parseInt(resultText.getText());
             op = '+';
-            resultText.setText("0");
+            resultText.setText("+");
             //System.out.println(num1);
         }else if (source == mulBtn){
-            //ä¹˜æ³•
-            num1 = str;
+            //³Ë·¨
+            num1 = Integer.parseInt(resultText.getText());
             op = '*';
-            resultText.setText("0");
+            resultText.setText("*");
 
         }else if (source == divBtn){
-            //é™¤æ³•
-            num1 = str;
+            //³ı·¨
+            num1 = Integer.parseInt(resultText.getText());
             op = '/';
-            resultText.setText("0");
+            resultText.setText("/");
 
         }else if (source == equalsBtn){
             int result = 0;
-            num2 = str;
+            num2 = Integer.parseInt(resultText.getText());
             switch (op){
                 case '+':
                     result = num1+num2;
@@ -138,16 +137,16 @@ public class GridLayoutTest extends JFrame implements ActionListener {
                     break;
                 case '/':
                     if (num2==0){
-                        JOptionPane.showMessageDialog(null,"é™¤æ•°ä¸èƒ½ä¸º0");
+                        JOptionPane.showMessageDialog(null,"³ıÊı²»ÄÜÎª0");
                     }
                     result = num1/num2;
                     break;
             }
             resultText.setText(result+"");
         }else {
-            //æ•°å­—æŒ‰é’®
+            //Êı×Ö°´Å¥
             String s = resultText.getText();
-            if (s.equals("0")){
+            if (s.equals("0")||s.equals("+")||s.equals("-")||s.equals("*")||s.equals("/")){
                 resultText.setText(((JButton)source).getText());
             } else {
                 resultText.setText(s+((JButton)source).getText());
