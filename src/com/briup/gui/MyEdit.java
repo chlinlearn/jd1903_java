@@ -10,10 +10,7 @@ import com.sun.corba.se.impl.interceptors.PICurrent;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 public class MyEdit extends JFrame implements ActionListener {
     private Container contentPane;
@@ -133,13 +130,8 @@ public class MyEdit extends JFrame implements ActionListener {
         addItemListener(copyItem,pasteItem,cutItem,pCopy,
                 pPaste,pCut,openItem,saveItem,exitItem,aboutItem);
 
-        //文本域添加鼠标事件
-        area.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
+        //文本域添加鼠标事件,使用适配器，可以不用重写所有接口，代理模式？
+        area.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 //获取按下的键,1表示左键,3表示右键
@@ -148,21 +140,6 @@ public class MyEdit extends JFrame implements ActionListener {
                     //上下文菜单出现的位置
                     popupMenu.show(area,e.getX(),e.getY());
                 }
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
             }
         });
         //把菜单栏加入到容器

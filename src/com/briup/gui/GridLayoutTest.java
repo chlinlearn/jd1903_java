@@ -3,7 +3,7 @@ package com.briup.gui;
 /* *
  * @author: xuchunlin
  * @createTime: 2019/6/20/10:20
- * @description: Íø¸ñ²¼¾Ö²âÊÔ,¼ÆËãÆ÷
+ * @description: ????????,??????
  */
 
 import javax.swing.*;
@@ -16,19 +16,19 @@ public class GridLayoutTest extends JFrame implements ActionListener {
     private JTextField resultText;
     private JButton[] btns = new JButton[10];
     private JButton clearBtn,addBtn,minusBtn,divBtn,mulBtn,equalsBtn;
-    private int str = 0;//ÁÙÊ±±äÁ¿£¬»ñÈ¡µ±Ç°ÊäÈë
-    private int num1 = 0;//µÚÒ»¸ö²Ù×÷Êı
-    private int num2 = 0;//µÚ¶ş¸ö²Ù×÷Êı
-    private char op = ' ';//²Ù×÷·û
+    private int str = 0;//???????????????????
+    private int num1 = 0;//???????????
+    private int num2 = 0;//???????????
+    private char op = ' ';//??????
 
     public GridLayoutTest(){
         ImageIcon icon = new ImageIcon("src/com/briup/gui/" +
-                "icons/¼ÆËãÆ÷.png");
+                "icons/è®¡ç®—å™¨.png");
         setIconImage(icon.getImage());
-        setTitle("¼ÆËãÆ÷");
+        setTitle("è®¡ç®—å™¨");
         setSize(500,500);
         setLocation(200,200);
-        //ÉèÖÃ½çÃæ´óĞ¡²»¿É¸Ä±ä
+        //????????Ğ¡??????
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         contentPane = getContentPane();
@@ -37,24 +37,24 @@ public class GridLayoutTest extends JFrame implements ActionListener {
     }
     public void initGui(){
         resultText = new JTextField();
-        //ÉèÖÃ¹â±êÎÄ±¾ÓÒ¶ÔÆë
+        //???Ã¹??????????
         resultText.setHorizontalAlignment(JTextField.RIGHT);
         resultText.setText("0");
-        //ÉèÖÃ²»¿É±à¼­
+        //???Ã²????
         resultText.setEditable(false);
         resultText.setBackground(Color.LIGHT_GRAY);
-        //ÉèÖÃ×ÖÌå
-        Font font = new Font("¿¬Ìå",Font.BOLD,42);
+        //????????
+        Font font = new Font("????",Font.BOLD,42);
         resultText.setFont(font);
         contentPane.add(resultText,BorderLayout.NORTH);
 
-        //ÖĞ¼ä°´Å¥²¿·Ö
+        //?Ğ¼??????
         JPanel cPanel = new JPanel();
         cPanel.setLayout(new GridLayout(4,4));
         for (int i=0;i<btns.length;i++){
             btns[i] = new JButton(i+"");
             btns[i].setFont(font);
-            //Îª°´Å¥Ìí¼Ó¼àÌıÊÂ¼ş
+            //?????????????
             btns[i].addActionListener(this);
             cPanel.add(btns[i]);
         }
@@ -78,7 +78,7 @@ public class GridLayoutTest extends JFrame implements ActionListener {
         cPanel.add(divBtn);
         cPanel.add(equalsBtn);
 
-        //Îª°´Å¥Ìí¼Ó¼àÌıÊÂ¼ş
+        //?????????????
         addListener(clearBtn,addBtn,minusBtn,mulBtn,divBtn,equalsBtn);
     }
 
@@ -92,32 +92,32 @@ public class GridLayoutTest extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    //ÊÂ¼ş¼¯ÖĞ´¦Àí
+    //??????Ğ´???
     @Override
     public void actionPerformed(ActionEvent e) {
-        //»ñÈ¡ÊÂ¼şÔ´
+        //???????
         Object source = e.getSource();
         if (source == clearBtn){
             resultText.setText("0");
         }else if (source == minusBtn){
-            //¼õ·¨
+            //????
             num1 = Integer.parseInt(resultText.getText());
             op = '-';
             resultText.setText("-");
         }else if (source == addBtn){
-            //¼Ó·¨
+            //???
             num1 = Integer.parseInt(resultText.getText());
             op = '+';
             resultText.setText("+");
             //System.out.println(num1);
         }else if (source == mulBtn){
-            //³Ë·¨
+            //???
             num1 = Integer.parseInt(resultText.getText());
             op = '*';
             resultText.setText("*");
 
         }else if (source == divBtn){
-            //³ı·¨
+            //????
             num1 = Integer.parseInt(resultText.getText());
             op = '/';
             resultText.setText("/");
@@ -137,14 +137,14 @@ public class GridLayoutTest extends JFrame implements ActionListener {
                     break;
                 case '/':
                     if (num2==0){
-                        JOptionPane.showMessageDialog(null,"³ıÊı²»ÄÜÎª0");
+                        JOptionPane.showMessageDialog(null,"?????????0");
                     }
                     result = num1/num2;
                     break;
             }
             resultText.setText(result+"");
         }else {
-            //Êı×Ö°´Å¥
+            //??????
             String s = resultText.getText();
             if (s.equals("0")||s.equals("+")||s.equals("-")||s.equals("*")||s.equals("/")){
                 resultText.setText(((JButton)source).getText());
