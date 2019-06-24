@@ -17,8 +17,11 @@ public class AccountTest extends Thread {
 
     @Override
     public void run() {
+        double amt = 0;
+        synchronized (account){
+             amt = account.withdraw(1000);
+        }
         //取钱
-        double amt = account.deposit(1000);
         System.out.println(getName()+"从"+account.getAccountNo()+
                 "账号里面取了"+amt+"钱"+",剩余金额"+account.getBalance()+"元");
     }
