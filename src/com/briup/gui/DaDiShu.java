@@ -21,7 +21,7 @@ public class DaDiShu extends JFrame implements ActionListener {
     private Timer gradeTimer;
     private static int time = 10;
     private static int score = 0;
-    private int tempNum;
+    private int old_index = 0;
     ImageIcon icon = new ImageIcon("src/com/briup/gui/" +
             "icons/game.png");
     ImageIcon img_mouse = new ImageIcon("src/com/briup/gui/" +
@@ -34,7 +34,7 @@ public class DaDiShu extends JFrame implements ActionListener {
         gradeTimer = new Timer(1000,this);
 
         setIconImage(icon.getImage());
-        setTitle("ÊâìÂú∞Èº†");
+        setTitle("¥Úµÿ Û");
         setSize(600,600);
         setLocation(600,300);
         setResizable(false);
@@ -45,23 +45,23 @@ public class DaDiShu extends JFrame implements ActionListener {
     }
     public void initGui(){
         /*north*/
-        Font font = new Font("Ê•∑‰Ωì",Font.BOLD,20);
+        Font font = new Font("ø¨ÃÂ",Font.BOLD,20);
 
         comboBox = new JComboBox<String>();
-        comboBox.addItem("ÂàùÁ∫ß");
-        comboBox.addItem("‰∏≠Á∫ß");
-        comboBox.addItem("È´òÁ∫ß");
+        comboBox.addItem("≥ıº∂");
+        comboBox.addItem("÷–º∂");
+        comboBox.addItem("∏ﬂº∂");
         comboBox.setFont(font);
 
-        label_time = new JLabel("Êó∂Èó¥:");
+        label_time = new JLabel(" ±º‰:");
         label_time.setFont(font);
-        label_score = new JLabel("ÂæóÂàÜ:");
+        label_score = new JLabel("µ√∑÷:");
         label_score.setFont(font);
         timeShowLabel = new JLabel(" 10s ");
         timeShowLabel.setFont(font);
         scoreShowLabel = new JLabel("  0  ");
         scoreShowLabel.setFont(font);
-        startBtn = new JButton("ÂºÄÂßã");
+        startBtn = new JButton("ø™ º");
         startBtn.setBackground(Color.GREEN);
         startBtn.setFont(font);
         startBtn.addActionListener(this);
@@ -97,9 +97,9 @@ public class DaDiShu extends JFrame implements ActionListener {
         if (source==startBtn){
             timeShowLabel.setText(" 10s ");
             scoreShowLabel.setText("  0  ");
-            if (comboBox.getSelectedItem().equals("ÂàùÁ∫ß")){
+            if (comboBox.getSelectedItem().equals("≥ıº∂")){
                 gradeTimer.setDelay(750);
-            }else if (comboBox.getSelectedItem().equals("‰∏≠Á∫ß")){
+            }else if (comboBox.getSelectedItem().equals("÷–º∂")){
                 gradeTimer.setDelay(500);
             }else {
                 gradeTimer.setDelay(200);
@@ -115,20 +115,21 @@ public class DaDiShu extends JFrame implements ActionListener {
            }else {
                timer.stop();
                gradeTimer.stop();
-               JOptionPane.showMessageDialog(this,"Ê∏∏ÊàèÁªìÊùüÔºåÊÄªÂæóÂàÜÔºö"+score);
+               JOptionPane.showMessageDialog(this,"”Œœ∑Ω· ¯£¨◊‹µ√∑÷£∫"+score);
                time = 10;
                score = 0;
            }
         }
 
         if (source==gradeTimer){
-            tempNum = (int)(Math.random()*9);
-            System.out.println("before:"+tempNum);
-            btns[tempNum].setIcon(img_mouse);
-            btns[tempNum].setEnabled(true);
-            System.out.println("after:"+tempNum);
+            int index = (int)(Math.random()*9);
+            System.out.println("before:"+index);
+            btns[index].setIcon(img_mouse);
+            btns[index].setEnabled(true);
+            System.out.println("after:"+index);
+            old_index = index;
         }else {
-            if (e.getSource()==btns[tempNum]){
+            if (e.getSource()==btns[old_index]){
                 score += 10;
                 scoreShowLabel.setText(score+"  ");
                 System.out.println("score:"+score);
