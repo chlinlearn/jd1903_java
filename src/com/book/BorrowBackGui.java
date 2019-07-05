@@ -91,6 +91,7 @@ public class BorrowBackGui extends JFrame implements ActionListener {
         nPanel.add(genderLab);
         nPanel.add(ageLab);
         nPanel.add(noReturnLab);
+        nPanel.setBackground(Color.pink);
 
         sPanel.add(indexBtn);
         sPanel.add(inputText);
@@ -103,13 +104,10 @@ public class BorrowBackGui extends JFrame implements ActionListener {
         //splitPane.setDividerLocation(10);
         userPanel.add(splitPane,BorderLayout.NORTH);
 
-        //图书信息展示
+        //图书信息展示,伪数据
         String[][] searchData = new String[20][5];
         for (int i=0;i<20;i++){
             for (int j=0;j<5;j++){
-                if (j==4){
-                    searchData[i][j] = "借阅";
-                }
                 searchData[i][j] = i+""+j;
             }
         }
